@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+	<h1>Products!</h1>
+	<ul>
+		{% for product in products %}
+		<li>{{product.product_id}} {{product.brand}} {{product.delivery_method}}</li>
+		{% endfor %}
+	</ul>
+</body>
+</html>
