@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<body>
-	<h1>Products!</h1>
-	<ul>
-		{% for product in products %}
-		<li>{{product.product_id}} {{product.brand}} {{product.delivery_method}}</li>
-		{% endfor %}
-	</ul>
-</body>
-</html>
+{% extends 'base.html' %} {% block title %}Products{% endblock title %}Products
+{% block content %}
+<h1>Products!</h1>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Product Id</th>
+      <th>Brand</th>
+      <th>Delivery Method</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr>
+      <td>{{product.product_id}}</td>
+      <td>{{product.brand}}</td>
+      <td>{{product.delivery_method}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock%}

@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'product_mapping_admin'
+    'product_mapping_admin',
+    'django_bootstrap5'
 ]
 
 MIDDLEWARE = [

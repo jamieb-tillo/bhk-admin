@@ -1,3 +1,4 @@
 .env
 venv
 /.idea/vcs.xml
+blackhawk_admin/__pycache__/*
