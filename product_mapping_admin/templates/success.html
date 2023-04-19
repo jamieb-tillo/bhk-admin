@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Success!{% endblock title %}
+
+{% block content %}
+    <h1>Success!</h1>
+    <div>Successfully {{type}} product mapping</div>
+    <div>
+        <button class="btn btn-success"><a class="text-white text-decoration-none" href="/add">Add Another</a></button>
+        <button class="btn btn-primary"><a class="text-white text-decoration-none" href="/">Go Home</a></button>
+    </div>
+{% endblock content %}

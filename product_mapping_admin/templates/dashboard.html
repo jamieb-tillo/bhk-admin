@@ -1,20 +1,45 @@
 {% extends 'base.html' %} {% block title %}Products{% endblock title %}Products
 {% block content %}
 <h1>Products!</h1>
+<button class="btn btn-success"><a href="/add" class="text-white text-decoration-none">Add New</a></button>
+
 <table class="table table-striped table-hover">
   <thead>
     <tr>
       <th>Product Id</th>
-      <th>Brand</th>
-      <th>Delivery Method</th>
+      <th>Brand Slug</th>
+      <th colspan=3>Delivery Method</th>
+
     </tr>
   </thead>
   <tbody>
     {% for product in products %}
     <tr>
-      <td>{{product.product_id}}</td>
-      <td>{{product.brand}}</td>
-      <td>{{product.delivery_method}}</td>
+        <td>{{product.product_id}}</td>
+        <td>{{product.brand}}</td>
+        <td>{{product.delivery_method}}</td>
+      
+        <td>
+          <form action="edit" method="post">
+            {% csrf_token %}
+            <input type="hidden" value="{{product.product_id}}" name="product_id" readonly>
+            <input type="hidden" value="{{product.brand}}" name="brand" readonly>
+            <input type="hidden" value="{{product.delivery_method}}" name="delivery_method" readonly>
+            <button class="btn btn-primary" type='submit'>
+              Edit
+            </button>
+          </form>
+        </td>
+      
+        <td><form action="delete" method="post">
+          {% csrf_token %}
+          <input type="hidden" value="{{product.product_id}}" name="product_id" readonly>
+          <button class="btn btn-danger" type="submit">
+            Delete
+          </button>
+        </form>
+      </td>
+
     </tr>
     {% endfor %}
   </tbody>

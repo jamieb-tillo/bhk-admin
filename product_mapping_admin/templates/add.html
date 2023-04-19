@@ -4,11 +4,8 @@
 {% block title %}Add Product Mapping{% endblock title %}
 
 {% block content %}
-
-
-<div class="container mt-2">
     <h1>Create New Product Mapping</h1>
-
+    <button class="btn btn-primary mb-3"><a href="/" class="text-white text-decoration-none">Home</a></button>
     <form action="add" method="post" class="was-validated">
         {% csrf_token %}
         {% render_field form.product_id class+="form-control mb-3" %}
@@ -16,6 +13,5 @@
         {% render_field form.delivery_method class+="form-select mb-3" %}
         <input type="submit" value="Submit" class="btn btn-primary">
     </form>
-</div>
 
 {% endblock content %}
