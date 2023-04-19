@@ -34,7 +34,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'product_mapping_admin',
-    'django_bootstrap5'
+    'django_bootstrap5',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [

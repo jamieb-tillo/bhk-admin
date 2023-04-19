@@ -23,4 +23,8 @@ def add(request):
     if request.method == 'GET':
         form = AddForm()
 
+    else:
+        form = AddForm(request.POST)
+        return HttpResponse({'content': form.cleaned_data})
+
     return render(request, 'add.html', {"form": form})
