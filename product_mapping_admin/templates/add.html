@@ -1,17 +1,22 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 
-{% block title %}Add Product Mapping{% endblock title %}
+{% block title %}Add New{% endblock title %}
 
 {% block content %}
 <h1>Create New Product Mapping</h1>
-<button class="btn btn-primary mb-3"><a class="text-white text-decoration-none" href="/">Home</a></button>
 <form action="add" class="was-validated" method="post">
-	{% csrf_token %}
-	{% render_field form.product_id class+="form-control mb-3" %}
-	{% render_field form.brand class+="form-control mb-3" %}
-	{% render_field form.delivery_method class+="form-select mb-3" %}
-	<input class="btn btn-primary" type="submit" value="Submit">
+    {% csrf_token %}
+    {% render_field form.product_id class+="form-control mb-3" %}
+    {% render_field form.brand class+="form-control mb-3" %}
+    {% render_field form.delivery_method class+="form-select mb-3" %}
+    <input class="btn btn-primary" type="submit" value="Submit">
 </form>
 
 {% endblock content %}
+{% block non_auth_content %}
+<p>You are not logged in</p>
+<button class="btn btn-primary">
+    <a class="text-white text-decoration-none" href="{% url 'login' %}">Login</a>
+</button>
+{% endblock non_auth_content %}

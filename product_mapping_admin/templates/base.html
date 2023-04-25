@@ -1,17 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8"/>
-	<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-	{% load django_bootstrap5 %}
-	{# Load Bootstrap CSS and JavaScript #}
-	{% bootstrap_css %}
-	{% bootstrap_javascript %}
-	{# Load Bootstrap alerts #}
-	{% bootstrap_messages %}
-	<title>{% block title %} {% endblock %}</title>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    {% load django_bootstrap5 %}
+    {# Load Bootstrap CSS and JavaScript #}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {# Load Bootstrap alerts #}
+    {% bootstrap_messages %}
+    <title>{% block title %} {% endblock %} - Blackhawk Product Mapping Admin</title>
 </head>
 <body>
-	<div class="container">{% block content %} {% endblock%}</div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+    <div class="container-fluid  px-5">
+        <span class="navbar-brand mb-0 h1">Blackhawk Product Mapping Admin</span>
+        <ul class="navbar-nav nav-pills justify-content-end ms-auto mb-2 mb-lg-0">
+            {% if user.is_authenticated %}
+            <li class="nav-item ">
+                <a href="{% url 'dashboard' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'add' %}" class="nav-link {% if request.path == '/add' %}active{% endif %}">Add
+                    Mapping</a>
+            </li>
+            <li class="nav-item ms-5">
+                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    {% if user.is_authenticated %}
+    {% block content %} {% endblock%}
+
+    {% else %}
+    {% block non_auth_content %}{% endblock non_auth_content %}
+    {% endif %}
+</div>
 </body>
 </html>

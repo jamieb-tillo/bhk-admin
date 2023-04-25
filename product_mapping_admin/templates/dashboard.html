@@ -1,48 +1,64 @@
-{% extends 'base.html' %} {% block title %}Products{% endblock title %}Products
+{% extends 'base.html' %}
+
+{% block title %}
+{% if user.is_authenticated %}
+Products
+{% else %}
+Home
+{% endif %}
+{% endblock title %}
+
 {% block content %}
-<h1>Products!</h1>
+<h2>Products!</h2>
 <button class="btn btn-success"><a class="text-white text-decoration-none" href="/add">Add New</a></button>
-
 <table class="table table-striped table-hover">
-	<thead>
-		<tr>
-			<th>Product Id</th>
-			<th>Brand Slug</th>
-			<th colspan=3>Delivery Method</th>
+    <thead>
+    <tr>
+        <th>Product Id</th>
+        <th>Brand Slug</th>
+        <th colspan=3>Delivery Method</th>
 
-		</tr>
-	</thead>
-	<tbody>
-		{% for product in products %}
-		<tr>
-			<td>{{product.product_id}}</td>
-			<td>{{product.brand}}</td>
-			<td>{{product.delivery_method}}</td>
+    </tr>
+    </thead>
+    <tbody>
+    {% for product in products %}
+    <tr>
+        <td>{{product.product_id}}</td>
+        <td>{{product.brand}}</td>
+        <td>{{product.delivery_method}}</td>
 
-			<td>
-				<form action="edit" method="post">
-					{% csrf_token %}
-					<input name="product_id" readonly type="hidden" value="{{product.product_id}}">
-					<input name="brand" readonly type="hidden" value="{{product.brand}}">
-					<input name="delivery_method" readonly type="hidden" value="{{product.delivery_method}}">
-					<button class="btn btn-primary" type='submit'>
-						Edit
-					</button>
-				</form>
-			</td>
+        <td>
+            <form action="edit" method="post">
+                {% csrf_token %}
+                <input name="product_id" readonly type="hidden" value="{{product.product_id}}">
+                <input name="brand" readonly type="hidden" value="{{product.brand}}">
+                <input name="delivery_method" readonly type="hidden" value="{{product.delivery_method}}">
+                <button class="btn btn-primary" type='submit'>
+                    Edit
+                </button>
+            </form>
+        </td>
 
-			<td>
-				<form action="delete" method="post">
-					{% csrf_token %}
-					<input name="product_id" readonly type="hidden" value="{{product.product_id}}">
-					<button class="btn btn-danger" type="submit">
-						Delete
-					</button>
-				</form>
-			</td>
+        <td>
+            <form action="delete" method="post">
+                {% csrf_token %}
+                <input name="product_id" readonly type="hidden" value="{{product.product_id}}">
+                <button class="btn btn-danger" type="submit">
+                    Delete
+                </button>
+            </form>
+        </td>
 
-		</tr>
-		{% endfor %}
-	</tbody>
+    </tr>
+    {% endfor %}
+    </tbody>
 </table>
-{% endblock%}
+
+{% endblock content %}
+
+{% block non_auth_content %}
+<p>You are not logged in</p>
+<button class="btn btn-primary">
+    <a class="text-white text-decoration-none" href="{% url 'login' %}">Login</a>
+</button>
+{% endblock non_auth_content %}

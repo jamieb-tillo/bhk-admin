@@ -1,15 +1,10 @@
 {% extends 'base.html' %}
 {% load widget_tweaks %}
 
-{% block title %}Edit Product Mapping {% endblock title %}
+{% block title %}Edit{% endblock title %}
 
 {% block content %}
 <h1>Edit Product Mapping {{form.product_id.value}} </h1>
-<button class="btn btn-primary mb-3">
-	<a class="text-white text-decoration-none" href="/">
-		Home
-	</a>
-</button>
 <form action="submit" class="was-validated" method="post">
 	{% csrf_token %}
 	{% render_field form.product_id %}
@@ -19,3 +14,10 @@
 </form>
 
 {% endblock content %}
+
+{% block non_auth_content %}
+<p>You are not logged in</p>
+<button class="btn btn-primary">
+	<a class="text-white text-decoration-none" href="{% url 'login' %}">Login</a>
+</button>
+{% endblock non_auth_content %}
